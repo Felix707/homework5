@@ -199,7 +199,7 @@ const amount = function(count){
 
 //Ex.3 criminal car against police (moving police car and bouncing policemen)
 
-<canvas id='canvas' width=800 height=300></canvas>
+<canvas id='canvas' width=800 height=400></canvas>
 
 <script>
   const canvas = document.getElementById('canvas');
@@ -220,7 +220,7 @@ const amount = function(count){
   const car = {
       img   : carImg,
       x     : 10,
-      y     : 10,
+      y     : 50,
       width : 90,
       height: 44,
       xDelta: 0,
@@ -228,7 +228,7 @@ const amount = function(count){
   };
   const auto={
       img   : autoImg,
-      x     : 300,
+      x     : 680,
       y     : 13,
       width : 110,
       height: 60,
@@ -289,6 +289,38 @@ const amount = function(count){
  	
     };
 
+  const intersaction = function(){
+    if((car.x <= auto.x+10 && auto.x+10 <= car.x+car.width) ||
+       (car.x <= auto.x+auto.width && auto.width+auto.x <= car.x+car.width)){
+      if((car.y <= auto.y+10 && auto.y+10 <= car.y+car.height) ||
+         (car.y <= auto.y+auto.height && auto.height+auto.y <= car.y+car.height)){
+         alert('Game Over');  
+      }
+    }
+    if((car.x <= police.x && police.x <= car.x+car.width) ||
+       (car.x <= police.x+police.width && police.width+police.x <= car.x+car.width)){
+      if((car.y <= police.y && police.y <= car.y+car.height) ||
+         (car.y <= police.y+police.height && police.height+police.y <= car.y+car.height)){
+         alert('Game Over');  
+      }
+    }
+    if((car.x <= police1.x && police1.x <= car.x+car.width) ||
+       (car.x <= police1.x+police1.width && police1.width+police1.x <= car.x+car.width)){
+      if((car.y <= police1.y && police1.y <= car.y+car.height) ||
+         (car.y <= police1.y+police1.height && police1.height+police1.y <= car.y+car.height)){
+         alert('Game Over');  
+      }
+    }
+    if((car.x <= police2.x && police2.x <= car.x+car.width) ||
+       (car.x <= police2.x+police2.width && police2.width+police2.x <= car.x+car.width)){
+      if((car.y <= police2.y && police2.y <= car.y+car.height) ||
+         (car.y <= police2.y+police2.height && police2.height+police2.y <= car.y+car.height)){
+         alert('Game Over');  
+      }
+    }   
+    
+  };
+  
   
   const updateCop = function(){  
      if(police.x >= canvas.width - police.width){
@@ -326,9 +358,11 @@ const amount = function(count){
     draw();
     updateData();
     updateCop();
+    intersaction();
     requestAnimationFrame(loop);
   };
-  loop();
+  
+  
   
 const leftKey = 37;
 const upKey = 38;
@@ -336,6 +370,11 @@ const rightKey = 39;
 const downKey = 40;
 
 document.addEventListener('keydown', function(event) {
+  
+  
+  
+  
+  
 	if(event.keyCode === rightKey) {
       car.x = car.x + 25;
       if(car.x >= canvas.width-15){
@@ -359,6 +398,7 @@ document.addEventListener('keydown', function(event) {
   	}
    
 }, false);
+  loop();
 </script> 
 
 
